@@ -12,7 +12,7 @@ spec:
   ports:
     - name: homeassistant
       protocol: TCP
-      port: 8123
+      port: 80
       targetPort: 8123
       nodePort: 30438
   selector:
@@ -21,7 +21,7 @@ spec:
   sessionAffinity: None
 ---
 kind: Ingress
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: "ha-ingress"
   namespace: homeassistant
@@ -34,4 +34,4 @@ spec:
           - path: /
             backend:
               serviceName: homeassistant
-              servicePort: 8123
+              servicePort: 80
