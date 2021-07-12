@@ -1,0 +1,75 @@
+  
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: homeassistant
+  labels:
+    name: homeassistant
+    
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-ha
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/kubernetes/homeassistant"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: homeassistant-storage
+ namespace: homeassistant
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: homeassistant
+  namespace: homeassistant
+  labels:
+    app: homeassistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homeassistant
+  template:
+    metadata:
+      labels:
+        app: homeassistant
+    spec:
+      volumes:
+        - name: ha-storage
+          persistentVolumeClaim:
+            name: homeassistant-storage
+      containers:
+        - name: raspberrypi4-homeassistant
+          image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:0.108.6'
+          ports:
+            - name: http
+              containerPort: 8123
+              protocol: TCP
+          volumeMounts:
+            - name: ha-storage
+              mountPath: /config
+          securityContext:
+            privileged: true
+      restartPolicy: Always
+      hostNetwork: true
