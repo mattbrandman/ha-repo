@@ -19,3 +19,19 @@ spec:
     app: homeassistant
   type: NodePort
   sessionAffinity: None
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: "ha-ingress"
+  namespace: homeassistant
+
+spec:
+  rules:
+    - host: my-ha.net
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: homeassistant
+              servicePort: homeassistant
