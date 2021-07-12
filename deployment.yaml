@@ -59,7 +59,6 @@ spec:
         - name: ha-storage
           persistentVolumeClaim:
             claimName: homeassistant-storage
-
       containers:
         - name: raspberrypi4-homeassistant
           image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:0.108.6'
