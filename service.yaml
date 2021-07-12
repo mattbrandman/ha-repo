@@ -34,4 +34,4 @@ spec:
           - path: /
             backend:
               serviceName: homeassistant
-              servicePort: homeassistant
+              servicePort: 8123
