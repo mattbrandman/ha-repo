@@ -33,5 +33,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: homeassistant
-              servicePort: 80
+              service:
+                name: homeassistant
+                port:
+                  number: 80
