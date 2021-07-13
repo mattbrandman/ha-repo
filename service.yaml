@@ -28,10 +28,9 @@ metadata:
 
 spec:
   rules:
-    - host: my-ha.net
-      http:
+    - http:
         paths:
-          - path: "/"
+          - path: "/foo"
             pathType: Prefix
             backend:
               service:
