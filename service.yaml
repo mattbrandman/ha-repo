@@ -12,7 +12,7 @@ spec:
   ports:
     - name: homeassistant
       protocol: TCP
-      port: 80
+      port: 8085
       targetPort: 8123
       nodePort: 30438
   selector:
@@ -37,4 +37,4 @@ spec:
               service:
                 name: homeassistant
                 port:
-                  number: 80
+                  number: 8085
