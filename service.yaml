@@ -12,7 +12,7 @@ spec:
   ports:
     - name: homeassistant
       protocol: TCP
-      port: 8085
+      port: 80
       targetPort: 8123
       nodePort: 30438
   selector:
@@ -25,6 +25,8 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: "ha-ingress"
   namespace: homeassistant
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 
 spec:
   rules:
@@ -36,4 +38,4 @@ spec:
               service:
                 name: homeassistant
                 port:
-                  number: 8085
+                  number: 80
