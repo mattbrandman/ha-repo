@@ -21,18 +21,19 @@ spec:
   sessionAffinity: None
 ---
 
-
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
-  name: simpleingressroute
-  namespace: default
+  name: myingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
-  entryPoints:
-    - web
-  routes:
-  - match: PathPrefix(`/`)
-    kind: Rule
-    services:
-    - name: homeassistant
-      port: 80
+  rules:
+  - host: my-ha.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          serviceName: homeassistant
+          servicePort: 80
