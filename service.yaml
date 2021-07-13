@@ -27,6 +27,7 @@ metadata:
   name: myingress
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
   - host: my-ha.net
