@@ -26,7 +26,7 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: myingress
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+    traefik.ingress.kubernetes.io/router.entrypoints: web
     kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
@@ -36,5 +36,7 @@ spec:
       - path: /
         pathType: Prefix
         backend:
-          serviceName: homeassistant
-          servicePort: 80
+          service:
+            name: homeassistant
+            port:
+              number: 80
