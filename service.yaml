@@ -20,22 +20,19 @@ spec:
   type: NodePort
   sessionAffinity: None
 ---
-kind: Ingress
-apiVersion: networking.k8s.io/v1
-metadata:
-  name: "ha-ingress"
-  namespace: homeassistant
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web
 
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute
+  namespace: default
 spec:
-  rules:
-    - http:
-        paths:
-          - path: "/"
-            pathType: Prefix
-            backend:
-              service:
-                name: homeassistant
-                port:
-                  number: 80
+  entryPoints:
+    - web
+  routes:
+  - match: PathPrefix(`/`)
+    kind: Rule
+    services:
+    - name: homeassistant
+      port: 80
