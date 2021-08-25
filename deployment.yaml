@@ -59,7 +59,7 @@ spec:
         - name: ha-storage
           persistentVolumeClaim:
             claimName: homeassistant-storage
-        - name: dev-usb0
+        - name: dev-usb1
           hostPath:
             path: /dev/ttyUSB1
       containers:
