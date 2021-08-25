@@ -59,6 +59,9 @@ spec:
         - name: ha-storage
           persistentVolumeClaim:
             claimName: homeassistant-storage
+        - name: dev-usb0
+          hostPath:
+            path: /dev/ttyUSB1
       containers:
         - name: raspberrypi4-homeassistant
           image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:stable'
@@ -69,6 +72,8 @@ spec:
           volumeMounts:
             - name: ha-storage
               mountPath: /config
+            - mountPath: /dev/ttyUSB1
+              name: dev-usb1
           securityContext:
             privileged: true
       restartPolicy: Always
