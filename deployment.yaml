@@ -66,7 +66,7 @@ spec:
         - name: raspberrypi4-homeassistant
           image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:2021.9.7'
           command: ["/bin/sh"]
-          args: ["-c", "wget -O - https://get.hacs.xyz | bash -"]
+          args: ["-c", "wget -O - https://get.hacs.xyz | bash - &"]
           ports:
             - name: http
               containerPort: 8123
