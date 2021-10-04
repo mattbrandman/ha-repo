@@ -64,9 +64,11 @@ spec:
             path: /dev/ttyUSB1
       containers:
         - name: raspberrypi4-homeassistant
-          image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:stable'
+          image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:2021.9.7'
           ports:
             - name: http
+              command: ["/bin/sh"]
+              args: ["-c", "wget -O - https://get.hacs.xyz | bash -"]
               containerPort: 8123
               protocol: TCP
           volumeMounts:
