@@ -64,7 +64,7 @@ spec:
             path: /dev/ttyUSB1
       containers:
         - name: raspberrypi4-homeassistant
-          image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:2021.9.7'
+          image: 'ghcr.io/home-assistant/raspberrypi4-homeassistant:2021.10.6'
           ports:
             - name: http
               containerPort: 8123
