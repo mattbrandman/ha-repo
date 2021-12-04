@@ -9,30 +9,14 @@ metadata:
     name: homeassistant
     
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: pv-ha
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 100Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/kubernetes/homeassistant"
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
- name: homeassistant-storage
- namespace: homeassistant
+  name: homeassistant-storage
 spec:
-  storageClassName: manual
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
+  storageClassName: longhorn
   resources:
     requests:
       storage: 100Mi
