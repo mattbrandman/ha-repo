@@ -9,19 +9,19 @@ metadata:
     name: homeassistant
     
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: homeassistant-storage
-  namespace: homeassistant
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn
-  resources:
-    requests:
-      storage: 1Gi
----
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: homeassistant-storage
+#   namespace: homeassistant
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   storageClassName: longhorn
+#   resources:
+#     requests:
+#       storage: 1Gi
+# ---
 
 kind: Deployment
 apiVersion: apps/v1
@@ -44,8 +44,8 @@ spec:
     spec:
       volumes:
         - name: ha-storage
-          persistentVolumeClaim:
-            claimName: homeassistant-storage
+#           persistentVolumeClaim:
+#             claimName: homeassistant-storage
         - name: dev-usb1
           hostPath:
             path: /dev/ttyUSB1
@@ -57,8 +57,8 @@ spec:
               containerPort: 8123
               protocol: TCP
           volumeMounts:
-            - name: ha-storage
-              mountPath: /config
+#             - name: ha-storage
+#               mountPath: /config
             - mountPath: /dev/ttyUSB1
               name: dev-usb1
           securityContext:
