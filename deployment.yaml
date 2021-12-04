@@ -43,9 +43,9 @@ spec:
         app: homeassistant
     spec:
       volumes:
-        - name: ha-storage
-          persistentVolumeClaim:
-            claimName: homeassistant-storage
+#         - name: ha-storage
+#           persistentVolumeClaim:
+#             claimName: homeassistant-storage
         - name: dev-usb1
           hostPath:
             path: /dev/ttyUSB1
@@ -57,8 +57,8 @@ spec:
               containerPort: 8123
               protocol: TCP
           volumeMounts:
-            - name: ha-storage
-              mountPath: /config
+#             - name: ha-storage
+#               mountPath: /config
             - mountPath: /dev/ttyUSB1
               name: dev-usb1
           securityContext:
